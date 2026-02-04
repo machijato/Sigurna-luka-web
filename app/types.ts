@@ -3,7 +3,7 @@ export enum CategoryType {
   MENTAL_HEALTH = 'Mentalno zdravlje',
   VIOLENCE = 'Nasilje',
   EMERGENCY = 'Hitne službe',
-  LEGAL = 'Pravna pomoć',
+  LEGAL = 'Pravna pomoc',
   ADDICTION = 'Ovisnosti'
 }
 
