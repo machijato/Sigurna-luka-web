@@ -2,7 +2,9 @@ export enum CategoryType {
   CHILDREN = 'Djeca i mladi',
   MENTAL_HEALTH = 'Mentalno zdravlje',
   VIOLENCE = 'Nasilje',
-  EMERGENCY = 'Hitne situacije'
+  EMERGENCY = 'Hitne službe',
+  LEGAL = 'Pravna pomoć',
+  ADDICTION = 'Ovisnosti'
 }
 
 export type AgeGroup = '<18' | '18-25' | '26-35' | '36-45' | '46-65' | '65+';
