@@ -2,16 +2,16 @@ import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 import { HELPLINES } from "../data/helplines";
 import { AIAnalysisResponse } from "../types";
 
-// PAZI: Ovdje ide tvoj API ključ
-const genAI = new GoogleGenerativeAI("TVOJ_GEMINI_API_KEY");
+// API ključ povlačimo iz sustava
+const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY || "");
 
 export async function analyzeCrisisInput(userInput: string): Promise<AIAnalysisResponse> {
   try {
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash", // Koristimo stabilnu verziju
+      model: "gemini-1.5-flash",
     });
 
-    // Definiramo shemu odgovora kako bi AI uvijek vratio isti format
+    // OVDJE SU IZMJENE S .OBJECT, .ARRAY i .STRING
     const responseSchema = {
       type: SchemaType.OBJECT,
       properties: {
@@ -50,7 +50,7 @@ export async function analyzeCrisisInput(userInput: string): Promise<AIAnalysisR
       contents: [{ role: "user", parts: [{ text: prompt }] }],
       generationConfig: {
         responseMimeType: "application/json",
-        responseSchema: responseSchema,
+        responseSchema: responseSchema as any,
       },
     });
 
@@ -59,7 +59,6 @@ export async function analyzeCrisisInput(userInput: string): Promise<AIAnalysisR
 
   } catch (error) {
     console.error("AI Analysis Error:", error);
-    // Vraćamo fallback odgovor u slučaju greške da aplikacija ne "pukne"
     return {
       priorityNumbers: ["5"],
       exercise: "Pokušajte polako udahnuti na nos 4 sekunde, zadržati dah i polako izdahnuti.",
