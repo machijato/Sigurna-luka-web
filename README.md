@@ -1,4 +1,4 @@
-# Sigurna-luka-web
+# sigurna-luka-web
 # Sigurna Luka - AI platforma za pružanje pomoći
 
 ## 1. Opis projekta
