@@ -2,12 +2,20 @@ export enum CategoryType {
   CHILDREN = 'Djeca i mladi',
   MENTAL_HEALTH = 'Mentalno zdravlje',
   VIOLENCE = 'Nasilje',
+  PEER_VIOLENCE = 'Vršnjačko nasilje',
+  FAMILY_VIOLENCE = 'Nasilje u obitelji',
+  RELATIONSHIPS = 'Partnerski odnosi',
+  PTSD = 'PTSP',
+  ANXIETY = 'Anksioznost',
+  DEPRESSION = 'Depresija',
   EMERGENCY = 'Hitne službe',
-  LEGAL = 'Pravna pomoc',
+  LEGAL = 'Pravna pomoć',
   ADDICTION = 'Ovisnosti'
 }
 
-export type AgeGroup = '<18' | '18-25' | '26-35' | '36-45' | '46-65' | '65+';
+export interface AgeGroup {
+  // Ovdje ostavi definiciju ako je bila, ili samo makni dupli CategoryType
+}
 
 export interface Helpline {
   id: string;
@@ -17,25 +25,11 @@ export interface Helpline {
   description: string;
   hours: string;
   counties: string[];
-  targetAges: AgeGroup[];
+  targetAges: string[];
 }
 
 export interface AIAnalysisResponse {
   priorityNumbers: string[];
   exercise: string;
   empatheticMessage: string;
-}
-export enum CategoryType {
-  CHILDREN = 'Djeca i mladi',
-  MENTAL_HEALTH = 'Mentalno zdravlje',
-  VIOLENCE = 'Nasilje',
-  PEER_VIOLENCE = 'Vršnjačko nasilje',
-  FAMILY_VIOLENCE = 'Nasilje u obitelji',
-  RELATIONSHIPS = 'Partnerski odnosi',
-  PTSD = 'PTSP',
-  ANXIETY = 'Anksioznost',
-  DEPRESSION = 'Depresija',
-  EMERGENCY = 'Hitne službe',
-  LEGAL = 'Pravna pomoc',
-  ADDICTION = 'Ovisnosti'
 }
