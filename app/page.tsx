@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useEffect, useMemo } from 'react';
-import { Helpline, CategoryType, AgeGroup, AIAnalysisResponse } from './types';
+import { useState, useEffect, useMemo } from 'react';
+import { CategoryType, AgeGroup, AIAnalysisResponse } from './types';
 import { HELPLINES, ZUPANIJE } from './data/helplines';
 import { analyzeCrisisInput } from './services/geminiService';
 
@@ -17,7 +17,7 @@ const App = () => {
 
   // State-ovi za E-mail formu
   const [email, setEmail] = useState('');
-  const [isEmailSent, setIsEmailSent] = useState(false);
+  const [message, setMessage] = useState('');
 
   const quickExit = () => window.location.href = 'https://www.google.com';
 
@@ -151,22 +151,34 @@ const App = () => {
           </div>
           <p className="text-sm text-slate-500 mb-8 italic">Ukoliko niste spremni na razgovor telefonom, možete nam ostaviti svoj upit.</p>
           
-          <div className="flex flex-col md:flex-row gap-6 items-start">
-            <div className="flex-1 w-full space-y-2">
-              <label className="text-[10px] uppercase font-black text-slate-400 tracking-widest">E-mail adresa za odgovor</label>
-              <input 
-                type="email" value={email} onChange={(e) => setEmail(e.target.value)}
-                placeholder="npr. netko@email.com"
-                className="w-full p-4 bg-slate-50 border border-slate-100 rounded-xl outline-none"
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <label className="text-[10px] uppercase font-black text-slate-400 tracking-widest">Vaša poruka</label>
+              <textarea 
+                value={message} onChange={(e) => setMessage(e.target.value)}
+                placeholder="Ovdje opišite što vas muči..."
+                className="w-full h-32 p-4 bg-slate-50 border border-slate-100 rounded-xl outline-none resize-none"
               />
             </div>
-            <div className="flex items-center gap-3 mt-8">
-              <input type="checkbox" id="forward" className="w-5 h-5 rounded-md" />
-              <label htmlFor="forward" className="text-xs text-slate-600 font-medium leading-tight">
-                Želim da se moj upit proslijedi nadležnoj službi koja će mi odgovoriti u roku od 24h.
-              </label>
+
+            <div className="flex flex-col md:flex-row gap-6 items-start">
+              <div className="flex-1 w-full space-y-2">
+                <label className="text-[10px] uppercase font-black text-slate-400 tracking-widest">E-mail adresa za odgovor</label>
+                <input 
+                  type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+                  placeholder="npr. netko@email.com"
+                  className="w-full p-4 bg-slate-50 border border-slate-100 rounded-xl outline-none"
+                />
+              </div>
+              <div className="flex items-center gap-3 mt-8">
+                <input type="checkbox" id="forward" className="w-5 h-5 rounded-md" />
+                <label htmlFor="forward" className="text-xs text-slate-600 font-medium leading-tight">
+                  Želim da se moj upit proslijedi nadležnoj službi koja će mi odgovoriti u roku od 24h.
+                </label>
+              </div>
             </div>
           </div>
+          
           <button className="mt-8 bg-slate-100 text-slate-400 px-10 py-4 rounded-xl font-black text-sm uppercase tracking-widest cursor-not-allowed">
             🚀 Pošalji upit
           </button>
@@ -205,7 +217,7 @@ const App = () => {
         <div className="space-y-4">
           <h5 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Sigurnosni podsjetnik</h5>
           <p className="text-[11px] text-slate-400 leading-relaxed">
-            Ova platforma ne sprema vaše osobne podatke. Razgovor s AI asistentom je privremen. Ukoliko se nalazite u neposrednoj opasnosti, molimo vas da odmah nazovete 112 ili 194.
+            Ova platforma ne sprema vaše osobne podatke. Razgovor s AI asistentom je privreman. Ukoliko se nalazite u neposrednoj opasnosti, molimo vas da odmah nazovete 112 ili 194.
           </p>
           <div className="flex gap-4 pt-4 opacity-30">
             <span className="text-xl">🛡️</span><span className="text-xl">⚓</span><span className="text-xl">🔒</span>
