@@ -89,9 +89,8 @@ export const HELPLINES: Helpline[] = [
     description: 'Centar za pružanje pomoći djeci i mladima, žrtvama vršnjačkog nasilja.',
     hours: 'Radnim danom 08:00 - 20:00',
     counties: ["Sve"],
-    targetAges: ['<18', '18-25']
-  }
-];
+    targetAges: ['<18', '18-25'] 
+    },
 {
   id: '9',
   name: 'Centar za zaštitu od vršnjačkog nasilja',
