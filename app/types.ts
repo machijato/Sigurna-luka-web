@@ -13,9 +13,7 @@ export enum CategoryType {
   ADDICTION = 'Ovisnosti'
 }
 
-export interface AgeGroup {
-  // Ovdje ostavi definiciju ako je bila, ili samo makni dupli CategoryType
-}
+export type AgeGroup = string;
 
 export interface Helpline {
   id: string;
