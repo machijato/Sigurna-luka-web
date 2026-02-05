@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useMemo } from 'react';
+import emailjs from '@emailjs/browser';
 import { CategoryType, AgeGroup, AIAnalysisResponse } from './types';
 import { HELPLINES, ZUPANIJE } from './data/helplines';
 import { analyzeCrisisInput } from './services/geminiService';
@@ -18,6 +19,12 @@ const App = () => {
   // State-ovi za E-mail formu
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [isSending, setIsSending] = useState(false);
+
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init('[TVOJ_PUBLIC_KEY]');
+  }, []);
 
   const quickExit = () => window.location.href = 'https://www.google.com';
 
@@ -50,6 +57,33 @@ const App = () => {
       console.error(err);
     } finally {
       setIsAnalyzing(false);
+    }
+  };
+
+  const handleSend = async () => {
+    if (!email.trim() || !message.trim()) {
+      alert('Molimo popunite sve polje.');
+      return;
+    }
+
+    setIsSending(true);
+    try {
+      await emailjs.send(
+        '[TVOJ_SERVICE_ID]',
+        '[TVOJ_TEMPLATE_ID]',
+        {
+          user_email: email,
+          message: message,
+        }
+      );
+      alert('Poruka poslana!');
+      setMessage('');
+      setEmail('');
+    } catch (err) {
+      console.error(err);
+      alert('Greška pri slanju poruke. Pokušajte ponovno.');
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -179,8 +213,12 @@ const App = () => {
             </div>
           </div>
           
-          <button className="mt-8 bg-slate-100 text-slate-400 px-10 py-4 rounded-xl font-black text-sm uppercase tracking-widest cursor-not-allowed">
-            🚀 Pošalji upit
+          <button 
+            onClick={handleSend} 
+            disabled={isSending}
+            className={`mt-8 px-10 py-4 rounded-xl font-black text-sm uppercase tracking-widest transition-all ${isSending ? 'bg-slate-100 text-slate-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-200'}`}
+          >
+            🚀 {isSending ? 'Šaljem...' : 'Pošalji upit'}
           </button>
         </section>
 
