@@ -25,3 +25,17 @@ export interface AIAnalysisResponse {
   exercise: string;
   empatheticMessage: string;
 }
+export enum CategoryType {
+  CHILDREN = 'Djeca i mladi',
+  MENTAL_HEALTH = 'Mentalno zdravlje',
+  VIOLENCE = 'Nasilje',
+  PEER_VIOLENCE = 'Vršnjačko nasilje',
+  FAMILY_VIOLENCE = 'Nasilje u obitelji',
+  RELATIONSHIPS = 'Partnerski odnosi',
+  PTSD = 'PTSP',
+  ANXIETY = 'Anksioznost',
+  DEPRESSION = 'Depresija',
+  EMERGENCY = 'Hitne službe',
+  LEGAL = 'Pravna pomoc',
+  ADDICTION = 'Ovisnosti'
+}

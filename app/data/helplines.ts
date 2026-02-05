@@ -92,3 +92,64 @@ export const HELPLINES: Helpline[] = [
     targetAges: ['<18', '18-25']
   }
 ];
+{
+  id: '9',
+  name: 'Centar za zaštitu od vršnjačkog nasilja',
+  number: '01 4899 111',
+  category: CategoryType.PEER_VIOLENCE,
+  description: 'Podrška za djecu i mlade žrtve vršnjačkog nasilja i cyberbullyinga.',
+  hours: '24/7',
+  counties: ["Sve"],
+  targetAges: ['<18', '18-25']
+},
+{
+  id: '10',
+  name: 'Kuća za žene žrtve obiteljskog nasilja',
+  number: '01 4845 500',
+  category: CategoryType.FAMILY_VIOLENCE,
+  description: 'Zajednica i podrška za žene i djecu u obiteljskom nasilju.',
+  hours: '24/7',
+  counties: ["Sve"],
+  targetAges: ['18-25', '26-35', '36-45', '46-65', '65+']
+},
+{
+  id: '11',
+  name: 'Centar za bračne odnose',
+  number: '01 4877 333',
+  category: CategoryType.RELATIONSHIPS,
+  description: 'Savjetovanje za bračne, partnerske i obiteljske probleme.',
+  hours: 'Pon-Pet 09:00 - 21:00',
+  counties: ["Sve"],
+  targetAges: ['26-35', '36-45', '46-65', '65+']
+},
+{
+  id: '12',
+  name: 'PTSD Podrška centar',
+  number: '01 4866 222',
+  category: CategoryType.PTSD,
+  description: 'Stručna pomoć za osobe s traumatskim iskustvima i PTSP-om.',
+  hours: 'Pon-Pet 10:00 - 19:00',
+  counties: ["Sve"],
+  targetAges: ['18-25', '26-35', '36-45', '46-65', '65+']
+},
+{
+  id: '13',
+  name: 'Linija podrške za anksioznost',
+  number: '01 4888 666',
+  category: CategoryType.ANXIETY,
+  description: 'Pomoć i savjetovanje za osobe s anksioznim poremećajima.',
+  hours: 'Svaki dan 08:00 - 23:00',
+  counties: ["Sve"],
+  targetAges: ALL_AGES
+},
+{
+  id: '14',
+  name: 'Centar za podršku depresiji',
+  number: '01 4855 777',
+  category: CategoryType.DEPRESSION,
+  description: 'Stručna podrška i savjetovanje za osobe s depresijom.',
+  hours: '24/7',
+  counties: ["Sve"],
+  targetAges: ALL_AGES
+}
+];
