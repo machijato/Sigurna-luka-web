@@ -21,9 +21,9 @@ const App = () => {
   const [message, setMessage] = useState('');
   const [isSending, setIsSending] = useState(false);
 
-  // Initialize EmailJS
+  // Initialize EmailJS sa tvojim PUBLIC KEY
   useEffect(() => {
-    emailjs.init('[TVOJ_PUBLIC_KEY]');
+    emailjs.init('Ps7byDs6uO5hufWh5');
   }, []);
 
   const quickExit = () => window.location.href = 'https://www.google.com';
@@ -62,26 +62,27 @@ const App = () => {
 
   const handleSend = async () => {
     if (!email.trim() || !message.trim()) {
-      alert('Molimo popunite sve polje.');
+      alert('Molimo popunite sva polja (poruku i e-mail).');
       return;
     }
 
     setIsSending(true);
     try {
+      // Ovdje koristimo tvoj SERVICE_ID i TEMPLATE_ID
       await emailjs.send(
-        '[TVOJ_SERVICE_ID]',
-        '[TVOJ_TEMPLATE_ID]',
+        'service_j95i9h5',
+        'template_yvyi30d',
         {
           user_email: email,
           message: message,
         }
       );
-      alert('Poruka poslana!');
+      alert('Poruka je uspješno poslana! Javit ćemo vam se ubrzo.');
       setMessage('');
       setEmail('');
     } catch (err) {
-      console.error(err);
-      alert('Greška pri slanju poruke. Pokušajte ponovno.');
+      console.error('EmailJS Error:', err);
+      alert('Greška pri slanju poruke. Provjerite internetsku vezu i pokušajte ponovno.');
     } finally {
       setIsSending(false);
     }
@@ -255,7 +256,7 @@ const App = () => {
         <div className="space-y-4">
           <h5 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Sigurnosni podsjetnik</h5>
           <p className="text-[11px] text-slate-400 leading-relaxed">
-            Ova platforma ne sprema vaše osobne podatke. Razgovor s AI asistentom je privreman. Ukoliko se nalazite u neposrednoj opasnosti, molimo vas da odmah nazovete 112 ili 194.
+            Ova platforma ne sprema vaše osobne podatke. Razgovor s AI asistentom je privremen. Ukoliko se nalazite u neposrednoj opasnosti, molimo vas da odmah nazovete 112 ili 194.
           </p>
           <div className="flex gap-4 pt-4 opacity-30">
             <span className="text-xl">🛡️</span><span className="text-xl">⚓</span><span className="text-xl">🔒</span>
