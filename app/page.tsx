@@ -175,6 +175,19 @@ const App = () => {
           <div className="flex items-center gap-3 mb-2">
             <span className="text-2xl">📩</span>
             <h2 className="text-2xl font-black text-slate-800 tracking-tight">Želite da vam se netko javi?</h2>
+            </div>
+            <p className="text-slate-500 text-sm mb-8 italic">Ukoliko niste spremni na razgovor telefonom, možete nam ostaviti svoj upit.</p>
+            
+            <textarea 
+            value={userMessage} 
+            onChange={(e) => setUserMessage(e.target.value)}
+            placeholder="Ovdje opišite što vas muči..."
+            className="w-full h-40 p-6 rounded-3xl bg-slate-50 border-none outline-none resize-none text-base focus:ring-2 focus:ring-blue-100 mb-6"
+            />
+
+            <div className="space-y-6">
+            <div className="space-y-2">
+              <label className="text-[10px] uppercase font-black text-slate-400 ml-2">Vaša poruka</label>
           </div>
           <p className="text-slate-500 text-sm mb-8 italic">Ukoliko niste spremni na razgovor telefonom, možete nam ostaviti svoj upit.</p>
           
