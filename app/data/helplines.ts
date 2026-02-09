@@ -823,7 +823,7 @@ export const HELPLINES: Helpline[] = [
     services: ["Asistencija", "Radionice", "Dnevni boravak"],
     targetAges: ["18-25", "26+"],
     tags: ["Vinkovci", "slavonija", "asistencija", "pomoć"]
-  }
+  },
   // --- SEKCIJA E: OVISNOSTI ---
   {
     id: "vrapce-ovisnosti-zavod",
@@ -1004,7 +1004,7 @@ export const HELPLINES: Helpline[] = [
     services: ["Podrška apstinentima", "Informiranje", "Harm reduction"],
     targetAges: ["18-25", "26+"],
     tags: ["Zadar", "apstinencija", "droga", "pomoć"]
-  }
+  },
   // --- SEKCIJA F: STARIJE OSOBE ---
   {
     id: "alzheimer-huab-nacionalni",
@@ -1155,7 +1155,7 @@ export const HELPLINES: Helpline[] = [
     services: ["Pomoć u kući", "Higijena", "Nabava namirnica"],
     targetAges: ["26+"],
     tags: ["crveni križ", "njega", "pomoć u kući", "nemoćni"]
-  }
+  },
   // --- SEKCIJA G: MENTALNO ZDRAVLJE I PSIHIČKE TEŠKOĆE ---
   {
     id: "rebro-krizni-centar",
@@ -1427,7 +1427,7 @@ export const HELPLINES: Helpline[] = [
     services: ["Pravno savjetovanje", "Informiranje"],
     targetAges: ["26+"],
     tags: ["civilne žrtve", "prava", "zakon", "istina"]
-  }
+  },
   // --- SEKCIJA I: HITNI SOS TELEFONI (0-24h) ---
   {
     id: "jedinstveni-broj-112",
