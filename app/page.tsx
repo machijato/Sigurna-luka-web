@@ -32,9 +32,14 @@ const App = () => {
 
   const filteredHelplines = useMemo(() => {
     return HELPLINES.filter(h => {
-      const matchAge = selectedAge === 'all' || h.targetAges.includes(selectedAge as AgeGroup);
+      // Koristimo 'as any' da TypeScript ne prigovara oko formata stringa
+      const matchAge = selectedAge === 'all' || (h.targetAges as any).includes(selectedAge);
+      
       const matchCounty = selectedCounty === 'all' || h.counties.includes('Sve') || h.counties.includes(selectedCounty);
-      const matchCat = selectedCategory === 'all' || h.category === selectedCategory || h.category.includes(selectedCategory);
+      
+      // Koristimo .includes() jer kategorija u bazi može biti dugačak string
+      const matchCat = selectedCategory === 'all' || h.category.includes(selectedCategory);
+      
       return matchAge && matchCounty && matchCat;
     });
   }, [selectedAge, selectedCounty, selectedCategory]);
