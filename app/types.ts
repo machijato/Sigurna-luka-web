@@ -18,12 +18,17 @@ export type AgeGroup = string;
 export interface Helpline {
   id: string;
   name: string;
-  number: string;
-  category: CategoryType;
-  description: string;
-  hours: string;
+  category: string; // Promijenjeno u string radi lakšeg nadopunjavanja
   counties: string[];
+  city: string;
+  address: string;
+  number: string;
+  hours: string;
+  web: string;
+  description: string;
+  services: string[];
   targetAges: string[];
+  tags: string[];
 }
 
 export interface AIAnalysisResponse {
