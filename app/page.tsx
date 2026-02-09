@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useMemo } from 'react';
 import emailjs from '@emailjs/browser';
-import { CategoryType, AIAnalysisResponse, Helpline } from './types';
+import { CategoryType, AIAnalysisResponse } from './types';
 import { HELPLINES, ZUPANIJE } from './data/helplines';
 import { analyzeCrisisInput } from './services/geminiService';
 
@@ -70,9 +70,9 @@ const App = () => {
   const filteredHelplines = useMemo(() => {
     // 1. Prvo filtriramo po tvojim dropdown izbornicima
     let list = HELPLINES.filter(h => {
-      const matchAge = selectedAge === 'all' || h.targetAges.includes(selectedAge);
+      const matchAge = selectedAge === 'all' || h.targetAges.includes(selectedAge as any);
       const matchCounty = selectedCounty === 'all' || h.counties.includes('Sve') || h.counties.includes(selectedCounty);
-      const matchCat = selectedCategory === 'all' || h.category.includes(selectedCategory);
+      const matchCat = selectedCategory === 'all' || h.category === selectedCategory;
       return matchAge && matchCounty && matchCat;
     });
 
