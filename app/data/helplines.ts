@@ -597,7 +597,7 @@ export const HELPLINES: Helpline[] = [
     services: ["Grupna podrška", "Resocijalizacija"],
     targetAges: ["26+"],
     tags: ["alkohol", "ovisnost", "grupa podrške", "oporavak"]
-  }
+  },
   // --- SEKCIJA D: OSOBE S INVALIDITETOM I POSEBNIM POTREBAMA ---
   {
     id: "soih-mreza",
@@ -1548,7 +1548,7 @@ export const HELPLINES: Helpline[] = [
     services: ["Logistika", "Upravljanje krizama"],
     targetAges: ["<18", "18-25", "26+"],
     tags: ["katastrofa", "potres", "civilna zaštita"]
-  }
+  },
   // --- SEKCIJA J: OSTALO (BESKUĆNICI, SIROMAŠTVO, SPECIFIČNE BOLESTI) ---
   {
     id: "hnb-beskucnici",
