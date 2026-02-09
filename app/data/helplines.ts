@@ -461,7 +461,7 @@ export const HELPLINES: Helpline[] = [
     services: ["Savjetovanje", "Radionice", "Podrška"],
     targetAges: ["18-25", "26+"],
     tags: ["Baranja", "nasilje", "žene", "socijalna pomoć"]
-  }
+  },
   // --- SEKCIJA C: MUŠKARCI ---
   {
     id: "dpp-savjetovaliste-muskarci",
