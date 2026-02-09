@@ -17,7 +17,7 @@ export interface Helpline {
 }
 
 export const ZUPANIJE = [
-  "Grad Zagreb", "Zagrebačka", "Splitsko-dalmatinska", "Primorsko-goranska", 
+  "Grad Zagreb", "Zagrebačka", "Splitsko-dalmatinska", "Primorsko-goranska",
   "Istarska", "Osječko-baranjska", "Varaždinska", "Dubrovačko-neretvanska",
   "Zadarska", "Šibensko-kninska", "Vukovarsko-srijemska", "Sisačko-moslavačka",
   "Karlovačka", "Bjelovarsko-bilogorska", "Koprivničko-križevačka", "Ličko-senjska",
@@ -1306,7 +1306,7 @@ export const HELPLINES: Helpline[] = [
     services: ["Peer support", "Grupe podrške", "Resocijalizacija"],
     targetAges: ["18-25", "26+"],
     tags: ["podrška", "iskustvo", "prava", "destigmatizacija"]
-  }
+  },
   // --- SEKCIJA H: ŽRTVE RATA I PTSP ---
   {
     id: "nacionalni-centar-psihotrauma",
