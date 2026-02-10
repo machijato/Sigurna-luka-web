@@ -38,13 +38,26 @@ const App = () => {
     }
   };
 
+  // --- OVDJE JE FILTRIRANJE S FALLBACK LOGIKOM ---
   const filteredHelplines = useMemo(() => {
-    return HELPLINES.filter(h => {
+    const results = HELPLINES.filter(h => {
       const matchAge = selectedAge === 'all' || (h.targetAges as any).includes(selectedAge);
       const matchCounty = selectedCounty === 'all' || h.counties.includes('Sve') || h.counties.includes(selectedCounty);
       const matchCat = selectedCategory === 'all' || h.category === selectedCategory;
       return matchAge && matchCounty && matchCat;
     });
+
+    // Ako nema rezultata, vrati 4 obavezne službe
+    if (results.length === 0) {
+      return HELPLINES.filter(h => 
+        h.name.toLowerCase().includes("plavi telefon") || 
+        h.name.toLowerCase().includes("ženska pomoć sada") || 
+        h.name.toLowerCase().includes("rebro") || 
+        h.name.includes("112")
+      );
+    }
+
+    return results;
   }, [selectedAge, selectedCounty, selectedCategory]);
 
   const sortedAllHelplines = useMemo(() => {
@@ -75,13 +88,12 @@ const App = () => {
         
         {activeTab === 'search' && (
           <div className="space-y-10">
-            {/* Filteri */}
             <section className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-50">
               <h2 className="text-lg font-black text-slate-800 uppercase mb-6 flex items-center gap-2">🌐 Brzo filtriranje pomoći</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="space-y-2">
                   <label className="text-[10px] uppercase font-black text-slate-400">Dob korisnika</label>
-                  <select value={selectedAge} onChange={(e) => setSelectedAge(e.target.value)} className="w-full p-4 bg-slate-50 rounded-2xl outline-none text-sm">
+                  <select value={selectedAge} onChange={(e) => setSelectedAge(e.target.value)} className="w-full p-4 bg-slate-50 rounded-2xl outline-none text-sm font-medium">
                     <option value="all">Sve dobi</option>
                     <option value="<18">Djeca i mladi (&lt;18)</option>
                     <option value="18-25">Mladi odrasli (18-25)</option>
@@ -90,14 +102,14 @@ const App = () => {
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] uppercase font-black text-slate-400">Lokacija</label>
-                  <select value={selectedCounty} onChange={(e) => setSelectedCounty(e.target.value)} className="w-full p-4 bg-slate-50 rounded-2xl outline-none text-sm">
+                  <select value={selectedCounty} onChange={(e) => setSelectedCounty(e.target.value)} className="w-full p-4 bg-slate-50 rounded-2xl outline-none text-sm font-medium">
                     <option value="all">Cijela Hrvatska</option>
                     {ZUPANIJE.map(z => <option key={z} value={z}>{z}</option>)}
                   </select>
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] uppercase font-black text-slate-400">Vrsta problema</label>
-                  <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} className="w-full p-4 bg-slate-50 rounded-2xl outline-none text-sm">
+                  <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} className="w-full p-4 bg-slate-50 rounded-2xl outline-none text-sm font-medium">
                     <option value="all">Svi problemi</option>
                     {Object.values(CategoryType).map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
@@ -105,13 +117,12 @@ const App = () => {
               </div>
             </section>
 
-            {/* UPIT (Sada je ovdje, točno kao na tvojoj slici) */}
             <section className="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-50">
               <div className="flex items-center gap-3 mb-2">
                 <span className="text-2xl">📩</span>
                 <h2 className="text-2xl font-black text-slate-800 tracking-tight">Želite da vam se netko javi?</h2>
               </div>
-              <p className="text-slate-500 text-sm mb-8 italic">Ukoliko niste spremni na razgovor telefonom, možete nam ostaviti svoj upit.</p>
+              <p className="text-slate-500 text-sm mb-8 italic font-medium">Ukoliko niste spremni na razgovor telefonom, možete nam ostaviti svoj upit.</p>
               <div className="space-y-6">
                 <div className="space-y-2">
                   <label className="text-[10px] uppercase font-black text-slate-400 ml-2">Vaša poruka</label>
@@ -119,7 +130,7 @@ const App = () => {
                     value={userMessage} 
                     onChange={(e) => setUserMessage(e.target.value)}
                     placeholder="Ovdje opišite što vas muči..."
-                    className="w-full h-40 p-6 rounded-3xl bg-slate-50 border-none outline-none resize-none text-base focus:ring-2 focus:ring-blue-100"
+                    className="w-full h-40 p-6 rounded-3xl bg-slate-50 border-none outline-none resize-none text-base focus:ring-2 focus:ring-blue-100 font-medium"
                   />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
@@ -130,35 +141,36 @@ const App = () => {
                       value={email} 
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="npr. netko@email.com"
-                      className="w-full p-4 bg-slate-50 rounded-2xl outline-none"
+                      className="w-full p-4 bg-slate-50 rounded-2xl outline-none font-medium"
                     />
                   </div>
                   <div className="flex items-center gap-3 pb-4 px-2">
                     <input type="checkbox" className="w-5 h-5 accent-blue-600 cursor-pointer" id="proslijedi" />
-                    <label htmlFor="proslijedi" className="text-[10px] text-slate-500 font-medium leading-tight cursor-pointer">
-                      Želim da se moj upit proslijedi nadležnoj službi koja će mi odgovoriti u roku od 24h.
+                    <label htmlFor="proslijedi" className="text-[10px] text-slate-500 font-bold leading-tight cursor-pointer uppercase">
+                      Želim da se upit proslijedi dežurnoj službi (odgovor unutar 24h)
                     </label>
                   </div>
                 </div>
-                <button onClick={handleSendEmail} disabled={isSending} className="bg-blue-600 text-white font-black px-10 py-4 rounded-2xl uppercase text-xs shadow-sm hover:bg-blue-700 transition-all">
+                <button onClick={handleSendEmail} disabled={isSending} className="bg-blue-600 text-white font-black px-10 py-4 rounded-2xl uppercase text-xs shadow-md hover:bg-blue-700 transition-all active:scale-95">
                   🚀 {isSending ? "Slanje..." : "POŠALJI UPIT"}
                 </button>
               </div>
             </section>
 
-            {/* Rezultati filtera */}
             <div>
               <div className="flex justify-between items-end mb-8 px-4">
                 <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tighter">Sve dostupne službe</h2>
-                <span className="bg-slate-100 text-slate-500 text-[10px] font-black px-3 py-1 rounded-full uppercase">Pronađeno: {filteredHelplines.length}</span>
+                <span className="bg-blue-50 text-blue-600 text-[10px] font-black px-4 py-1.5 rounded-full uppercase border border-blue-100">
+                  Rezultati: {filteredHelplines.length}
+                </span>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {filteredHelplines.map(h => (
-                  <div key={h.id} className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-50 hover:shadow-xl transition-all">
-                    <span className="text-[9px] px-3 py-1.5 bg-blue-50 text-blue-600 rounded-full font-black uppercase block w-fit mb-4">{h.category}</span>
+                  <div key={h.id} className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-50 hover:shadow-xl transition-all group">
+                    <span className="text-[9px] px-3 py-1.5 bg-blue-50 text-blue-600 rounded-full font-black uppercase block w-fit mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">{h.category}</span>
                     <h4 className="text-2xl font-black text-slate-800 mb-2">{h.name}</h4>
-                    <p className="text-slate-500 text-sm mb-6 leading-relaxed line-clamp-2">{h.description}</p>
-                    <a href={`tel:${h.number}`} className="w-full bg-blue-600 text-white font-black py-4 rounded-2xl flex items-center justify-center gap-3 shadow-lg">Nazovi {h.number}</a>
+                    <p className="text-slate-500 text-sm mb-6 leading-relaxed line-clamp-2 font-medium">{h.description}</p>
+                    <a href={`tel:${h.number}`} className="w-full bg-slate-900 text-white font-black py-4 rounded-2xl flex items-center justify-center gap-3 shadow-lg hover:bg-blue-600 transition-all">Nazovi {h.number}</a>
                   </div>
                 ))}
               </div>
@@ -174,9 +186,9 @@ const App = () => {
                 <div key={h.id} className="py-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <div>
                     <h3 className="font-bold text-slate-800 text-lg">{h.name}</h3>
-                    <p className="text-slate-400 text-xs">{h.city} • {h.hours}</p>
+                    <p className="text-slate-400 text-xs font-medium uppercase tracking-wider">{h.city} • {h.hours}</p>
                   </div>
-                  <a href={`tel:${h.number}`} className="text-blue-600 font-black text-sm hover:underline">{h.number}</a>
+                  <a href={`tel:${h.number}`} className="bg-slate-50 text-blue-600 font-black px-6 py-2 rounded-xl text-sm hover:bg-blue-600 hover:text-white transition-all">{h.number}</a>
                 </div>
               ))}
             </div>
@@ -185,12 +197,13 @@ const App = () => {
 
         {activeTab === 'tips' && (
           <div className="space-y-8">
-            <h2 className="text-3xl font-black text-slate-900 mb-4 px-4 uppercase tracking-tighter text-center">Savjeti i podrška</h2>
-            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100">
-              <span className="text-blue-600 font-black text-[10px] uppercase">Članak #1</span>
-              <h3 className="text-2xl font-black text-slate-800 mt-2 mb-4">Kako prepoznati kriznu situaciju?</h3>
-              <p className="text-slate-600 leading-relaxed mb-4">Ponekad je teško razlučiti prolaznu tugu od stanja koje zahtijeva stručnu pomoć...</p>
-              <button className="text-blue-600 font-bold text-sm uppercase">Pročitaj više →</button>
+            <h2 className="text-3xl font-black text-slate-900 mb-4 px-4 uppercase tracking-tighter text-center italic">Savjeti i podrška</h2>
+            <div className="grid grid-cols-1 gap-6 text-center max-w-2xl mx-auto">
+                <div className="bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-sm">
+                    <div className="text-4xl mb-4">🌱</div>
+                    <h3 className="text-2xl font-black text-slate-800 mb-4 tracking-tight text-center">Nisi sam/a</h3>
+                    <p className="text-slate-500 leading-relaxed font-medium">Ova stranica je tvoj siguran prostor. Svi kontakti ovdje su provjereni i spremni pomoći u bilo kojem trenutku.</p>
+                </div>
             </div>
           </div>
         )}
